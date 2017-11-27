@@ -1,0 +1,5 @@
+F:\Unity\Project_1\Server\GameServer\LibServer\obj\Debug\LibServer.csprojResolveAssemblyReference.cache
+F:\Unity\Project_1\Server\bin\Debug\LibServer.dll
+F:\Unity\Project_1\Server\bin\Debug\LibServer.pdb
+F:\Unity\Project_1\Server\GameServer\LibServer\obj\Debug\LibServer.dll
+F:\Unity\Project_1\Server\GameServer\LibServer\obj\Debug\LibServer.pdb

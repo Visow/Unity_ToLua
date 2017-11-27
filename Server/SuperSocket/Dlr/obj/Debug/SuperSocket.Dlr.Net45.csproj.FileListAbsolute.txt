@@ -1,0 +1,6 @@
+F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Dlr.XML
+F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Dlr.dll
+F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Dlr.pdb
+F:\Unity\Project_1\Server\SuperSocket\Dlr\obj\Debug\SuperSocket.Dlr.Net45.csprojResolveAssemblyReference.cache
+F:\Unity\Project_1\Server\SuperSocket\Dlr\obj\Debug\SuperSocket.Dlr.dll
+F:\Unity\Project_1\Server\SuperSocket\Dlr\obj\Debug\SuperSocket.Dlr.pdb

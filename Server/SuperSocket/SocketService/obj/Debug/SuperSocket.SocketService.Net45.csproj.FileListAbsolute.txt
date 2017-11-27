@@ -1,0 +1,10 @@
+F:\Unity\Project_1\Server\bin\Debug\SuperSocket.SocketService.exe.config
+F:\Unity\Project_1\Server\bin\Debug\Config\log4net.config
+F:\Unity\Project_1\Server\bin\Debug\Config\log4net.unix.config
+F:\Unity\Project_1\Server\bin\Debug\supersocket.cmd
+F:\Unity\Project_1\Server\bin\Debug\supersocket.sh
+F:\Unity\Project_1\Server\bin\Debug\SuperSocket.SocketService.exe
+F:\Unity\Project_1\Server\bin\Debug\SuperSocket.SocketService.pdb
+F:\Unity\Project_1\Server\SuperSocket\SocketService\obj\Debug\SuperSocket.SocketService.Net45.csprojResolveAssemblyReference.cache
+F:\Unity\Project_1\Server\SuperSocket\SocketService\obj\Debug\SuperSocket.SocketService.exe
+F:\Unity\Project_1\Server\SuperSocket\SocketService\obj\Debug\SuperSocket.SocketService.pdb

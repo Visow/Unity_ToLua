@@ -1,0 +1,6 @@
+F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Facility.XML
+F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Facility.dll
+F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Facility.pdb
+F:\Unity\Project_1\Server\SuperSocket\Facility\obj\Debug\SuperSocket.Facility.Net45.csprojResolveAssemblyReference.cache
+F:\Unity\Project_1\Server\SuperSocket\Facility\obj\Debug\SuperSocket.Facility.dll
+F:\Unity\Project_1\Server\SuperSocket\Facility\obj\Debug\SuperSocket.Facility.pdb

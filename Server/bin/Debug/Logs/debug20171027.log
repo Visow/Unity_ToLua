@@ -1,0 +1,10 @@
+﻿2017-10-27 14:00:18,094 [2384] DEBUG DefaultBootstrap - The server instance GameService has been created!
+2017-10-27 14:00:18,344 [2384] DEBUG DefaultBootstrap - The server instance GameService has been initialized!
+2017-10-27 14:01:51,639 [2384] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2017-10-27 14:01:51,639 [2384] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2017-10-27 14:01:52,513 [2384] DEBUG GameService - Listener (0.0.0.0:8885) was started
+2017-10-27 14:01:52,529 [2384] DEBUG GameService - Listener ([::]:8885) was started
+2017-10-27 14:01:52,591 [2384] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2017-10-27 18:36:20,188 [6724] DEBUG GameService - Listener (0.0.0.0:8885) was stoppped
+2017-10-27 18:36:20,188 [6724] DEBUG GameService - Listener ([::]:8885) was stoppped
+2017-10-27 18:36:20,282 [6724] DEBUG DefaultBootstrap - The PerformanceMonitor has been stoppped!
