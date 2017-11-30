@@ -92,6 +92,7 @@ namespace VisowFrameWork {
             else
             {
                 lua.AddSearchPath(FileUtil.DataPath + "lua");
+				lua.AddSearchPath (FileUtil.DataPath + "lua/tolua");
             }
         }
 

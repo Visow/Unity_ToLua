@@ -5,3 +5,4 @@
 2017-11-27 14:56:59,958 [2628] DEBUG GameService - Listener (0.0.0.0:8885) was started
 2017-11-27 14:56:59,974 [2628] DEBUG GameService - Listener ([::]:8885) was started
 2017-11-27 14:57:00,083 [2628] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2017-11-28 09:43:12,862 [-1493917248] DEBUG AppServer-1022394928 - Listener (0.0.0.0:2012) was started

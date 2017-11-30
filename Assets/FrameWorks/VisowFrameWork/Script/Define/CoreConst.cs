@@ -13,13 +13,13 @@ namespace VisowFrameWork
         /// 否则就需要自己将StreamingAssets里面的所有内容
         /// 复制到自己的Webserver上面，并修改下面的WebUrl。
         /// </summary>
-        public const bool UpdateMode = true;                       //更新模式-默认关闭 
+		public const bool UpdateMode = true;                       //更新模式-默认关闭 
         public const string UpdateAssetsPath = "F:/Git/U3DTolua/Server/StreamAssets/";
 
         public const int TimerInterval = 1;
         public const int GameFrameRate = 30;                        //游戏帧频
 
-        public const string AppName = "Project_1";               //应用程序名称
+		public const string AppName = "U3DTolua";               //应用程序名称
 
         public const string AppPrefix = AppName + "_";              //应用程序前缀
         public const string ExtName = ".unity3d";                   //素材扩展名
