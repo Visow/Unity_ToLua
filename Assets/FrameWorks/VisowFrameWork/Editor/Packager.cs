@@ -10,20 +10,11 @@ namespace VisowFrameWork {
     public class Packager
     {
         public static string platform = string.Empty;
+        public static string PackagerOutPath = FileUtil.StreamAssetsPath;
         static List<string> paths = new List<string>();
         static List<string> files = new List<string>();
         static List<AssetBundleBuild> maps = new List<AssetBundleBuild>();
-
-        ///-----------------------------------------------------------
-        static string[] exts = { ".txt", ".xml", ".lua", ".assetbundle", ".json" };
-        static bool CanCopy(string ext)
-        {   //能不能复制
-            foreach (string e in exts)
-            {
-                if (ext.Equals(e)) return true;
-            }
-            return false;
-        }
+        
 
         [MenuItem("Visow工具箱/资源/资源打包", false, 101)]
         static void ResPackager()
@@ -47,13 +38,8 @@ namespace VisowFrameWork {
         /// <summary>
         /// 生成绑定素材
         /// </summary>
-        public static void BuildAssetResource(BuildTarget target)
+        public static void BuildAssetResource(BuildTarget target, string streamPath)
         {
-            if (Directory.Exists(Util.DataPath))
-            {
-                Directory.Delete(Util.DataPath, true);
-            }
-            string streamPath = Application.streamingAssetsPath;
             if (Directory.Exists(streamPath))
             {
                 Directory.Delete(streamPath, true);
@@ -62,11 +48,9 @@ namespace VisowFrameWork {
 
             maps.Clear();
 
-            HandleLuaFile();
-            HandleResuorcesBundle();
-            BuildPipeline.BuildAssetBundles(AppDataPath + "/StreamingAssets/Resources", maps.ToArray(), BuildAssetBundleOptions.None, target);
-            string streamDir = Application.dataPath + "/" + CoreConst.LuaTempDir;
-            if (Directory.Exists(streamDir)) Directory.Delete(streamDir, true);
+            HandleLuaFile(streamPath + "lua/");
+            HandleResuorcesBundle(streamPath + "Resources/");
+            BuildPipeline.BuildAssetBundles(streamPath + "Resources/", maps.ToArray(), BuildAssetBundleOptions.None, target);
             AssetDatabase.Refresh();
         }
 
@@ -97,75 +81,27 @@ namespace VisowFrameWork {
         }
 
         /// <summary>
-        /// 处理Lua代码包
-        /// </summary>
-        static void HandleLuaBundle()
-        {
-            string streamDir = Application.dataPath + "/" + CoreConst.LuaTempDir;
-            if (!Directory.Exists(streamDir)) Directory.CreateDirectory(streamDir);
-
-            string[] srcDirs = { CustomSettings.luaDir };
-            for (int i = 0; i < srcDirs.Length; i++)
-            {
-                ToLuaMenu.CopyLuaBytesFiles(srcDirs[i], streamDir);
-            }
-            string[] dirs = Directory.GetDirectories(streamDir, "*", SearchOption.AllDirectories);
-            for (int i = 0; i < dirs.Length; i++)
-            {
-                string name = dirs[i].Replace(streamDir, string.Empty);
-                name = name.Replace('\\', '_').Replace('/', '_');
-                name = "lua/lua_" + name.ToLower() + CoreConst.ExtName;
-
-                string path = "Assets" + dirs[i].Replace(Application.dataPath, "");
-                AddBuildMap(name, "*.bytes", path);
-            }
-            AddBuildMap("lua/lua" + CoreConst.ExtName, "*.bytes", "Assets/" + CoreConst.LuaTempDir);
-
-            //-------------------------------处理非Lua文件----------------------------------
-            string luaPath = AppDataPath + "/StreamingAssets/lua/";
-            for (int i = 0; i < srcDirs.Length; i++)
-            {
-                paths.Clear(); files.Clear();
-                string luaDataPath = srcDirs[i].ToLower();
-                Recursive(luaDataPath);
-                foreach (string f in files)
-                {
-                    if (f.EndsWith(".meta") || f.EndsWith(".lua")) continue;
-                    string newfile = f.Replace(luaDataPath, "");
-                    string path = Path.GetDirectoryName(luaPath + newfile);
-                    if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-
-                    string destfile = path + "/" + Path.GetFileName(f);
-                    File.Copy(f, destfile, true);
-                }
-            }
-            AssetDatabase.Refresh();
-        }
-
-        /// <summary>
         /// 处理Lua文件
         /// </summary>
-        static void HandleLuaFile()
+        static void HandleLuaFile(string luaPath)
         {
-            string resPath = AppDataPath + "/StreamingAssets/";
-            string luaPath = resPath + "/lua/";
-
             //----------复制Lua文件----------------
             if (!Directory.Exists(luaPath))
             {
                 Directory.CreateDirectory(luaPath);
             }
-            string[] luaPaths = { CoreConst.GameRoot + "/Lua" };
+            string[] luaPaths = { FileUtil.DevLuaPath };
 
             for (int i = 0; i < luaPaths.Length; i++)
             {
                 paths.Clear(); files.Clear();
-                string luaDataPath = luaPaths[i].ToLower();
+                string luaDataPath = luaPaths[i];
                 Recursive(luaDataPath);
                 int n = 0;
                 foreach (string f in files)
                 {
                     if (f.EndsWith(".meta")) continue;
+                    if (f.IndexOf(".vscode") >= 0) continue;
                     string newfile = f.Replace(luaDataPath, "");
                     string newpath = luaPath + newfile;
                     string path = Path.GetDirectoryName(newpath);
@@ -185,23 +121,22 @@ namespace VisowFrameWork {
             AssetDatabase.Refresh();
         }
 
-        static void HandleResuorcesBundle()
+        static void HandleResuorcesBundle(string resPath)
         {
-            string resPath = AppDataPath + "/StreamingAssets/Resources";
             if (!Directory.Exists(resPath))
             {
                 Directory.CreateDirectory(resPath);
             }
-            string workResPath = CoreConst.GameRoot + "/Resources";
+            string workResPath = FileUtil.DevResourcesPath;
 
             paths.Clear(); files.Clear();
             Recursive(workResPath);
 
             foreach (string dir in paths)
             {
-                string name = dir.Replace(workResPath + "/", "");
+                string name = dir.Replace(workResPath, "");
                 string[] curFiles = Directory.GetFiles(dir);
-				string subFilePath = "Assets/" + dir.Substring (AppDataPath.Length + 1);
+				string subFilePath = "Assets/" + dir.Substring (FileUtil.EditRoot.Length + 1);
                 if (curFiles.Length > 0)
                 {
 					AddBuildMap (name + CoreConst.ExtName, "*.*", subFilePath);
@@ -209,9 +144,8 @@ namespace VisowFrameWork {
             }
         }
 
-        public static void BuildFileIndex(string target, string appVer, string resVer, string url)
+        public static void BuildFileIndex(string target, string appVer, string resVer, string url, string resPath)
         {
-            string resPath = AppDataPath + "/StreamingAssets/";
             Version.GetInstance().BuildVersionFile(target, appVer, resVer, url, resPath, resPath);
             AssetDatabase.Refresh();
         }
@@ -221,7 +155,7 @@ namespace VisowFrameWork {
         /// </summary>
         static string AppDataPath
         {
-            get { return Application.dataPath.ToLower(); }
+            get { return FileUtil.EditRoot.ToLower(); }
         }
 
         /// <summary>
@@ -293,7 +227,7 @@ namespace VisowFrameWork {
 
         public static void SaveOldVersionInfo()
         {
-            string filePath = Application.streamingAssetsPath + "/" + CoreConst.VersionFile;
+            string filePath = FileUtil.StreamAssetsPath + "/" + CoreConst.VersionFile;
             if(!File.Exists(filePath)) return;
             VersionInfo versionInfo = Version.GetInstance().ReadVersionFile(filePath);
             string historyPath = Application.dataPath.Replace("/Assets", "/VersionHistory");

@@ -27,7 +27,7 @@ namespace VisowFrameWork {
         /// </summary>
         /// <param name="bundle"></param>
         public void AddBundle(string bundleName) {
-            string url = Util.DataPath + bundleName.ToLower();
+            string url = FileUtil.DataPath + bundleName.ToLower();
             if (File.Exists(url)) {
                 var bytes = File.ReadAllBytes(url);
                 AssetBundle bundle = AssetBundle.LoadFromMemory(bytes);

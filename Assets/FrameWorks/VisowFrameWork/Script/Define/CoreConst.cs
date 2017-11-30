@@ -13,13 +13,14 @@ namespace VisowFrameWork
         /// 否则就需要自己将StreamingAssets里面的所有内容
         /// 复制到自己的Webserver上面，并修改下面的WebUrl。
         /// </summary>
-        public const bool UpdateMode = false;                       //更新模式-默认关闭 
+        public const bool UpdateMode = true;                       //更新模式-默认关闭 
+        public const string UpdateAssetsPath = "F:/Git/U3DTolua/Server/StreamAssets/";
 
         public const int TimerInterval = 1;
         public const int GameFrameRate = 30;                        //游戏帧频
 
         public const string AppName = "Project_1";               //应用程序名称
-        public const string LuaTempDir = "Lua/";                    //临时目录
+
         public const string AppPrefix = AppName + "_";              //应用程序前缀
         public const string ExtName = ".unity3d";                   //素材扩展名
         public const string AssetDir = "StreamingAssets";           //素材目录 
@@ -34,7 +35,7 @@ namespace VisowFrameWork
         {
             get
             {
-                return Application.dataPath + "FrameWorks";
+                return FileUtil.FrameWorksPath;
             }
         }
 
@@ -42,7 +43,7 @@ namespace VisowFrameWork
         {
             get
             {
-                return Application.dataPath + "/Game";
+                return FileUtil.GameRoot;
             }
         }
 

@@ -87,11 +87,11 @@ namespace VisowFrameWork {
         {
             if (CoreConst.DebugMode)
             {
-                lua.AddSearchPath(CoreConst.GameRoot + "/Lua");
+                lua.AddSearchPath(FileUtil.DevLuaPath);
             }
             else
             {
-                lua.AddSearchPath(Util.DataPath + "lua");
+                lua.AddSearchPath(FileUtil.DataPath + "lua");
             }
         }
 

@@ -15,11 +15,18 @@ namespace VisowFrameWork {
 			Mac,
         }
 
+        public enum ResOutPath { 
+            StreamAsset,    // 工程内streamAsset目录
+            UpdateServer,   // 更新服资源目录
+            AppDataPath,    // 模拟app可写目录
+        }
+
         string appVer = "0.0.0";
         string resVer = "0.0.0";
         string target = "";
-        string url = "https://www.baidu.com";
+        string url =  CoreConst.WebUrl;
         System.Enum buildTarget = ResBuildTarget.Windows;
+        System.Enum resOutPath = ResOutPath.StreamAsset;
         void Awake() {
             this.titleContent = new GUIContent("资源打包");
             // 加载当前在项目中的版本资源信息;
@@ -75,14 +82,33 @@ namespace VisowFrameWork {
                 default:
                     break;
             }
+
+            resOutPath = EditorGUILayout.EnumPopup("选择编译后的资源导出目录:", resOutPath);
+            string curOutPath = "";
+            switch ((ResOutPath)resOutPath)
+            {
+                case ResOutPath.StreamAsset:
+                    curOutPath = FileUtil.StreamAssetsPath;
+                    break;
+                case ResOutPath.UpdateServer:
+                    curOutPath = CoreConst.UpdateAssetsPath;
+                    break;
+                case ResOutPath.AppDataPath:
+                    curOutPath = FileUtil.DataPath;
+                    break;
+                default:
+                    break;
+            }
+
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("编译资源"))
             {
                 // 编译之前,保存旧的文件
                 //Packager.SaveOldVersionInfo(curTarget);
                 // 编译资源
-                Packager.BuildAssetResource(curTarget);
-                Packager.BuildFileIndex(System.Enum.GetName(typeof(ResBuildTarget), buildTarget), appVer, resVer, url);
+                string outDir = curOutPath + System.Enum.GetName(typeof(ResBuildTarget), buildTarget) + "/";
+                Packager.BuildAssetResource(curTarget, outDir);
+                Packager.BuildFileIndex(System.Enum.GetName(typeof(ResBuildTarget), buildTarget), appVer, resVer, url, outDir);
             }
             if (GUILayout.Button("加入版本控制"))
             {

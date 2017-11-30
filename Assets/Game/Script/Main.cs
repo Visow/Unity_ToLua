@@ -23,8 +23,9 @@ public class Main : MonoBehaviour {
 
 
 	public void CheckExtractResource() {
-		bool isExists = Directory.Exists (Util.DataPath) && Directory.Exists (Util.DataPath + "lua/") && File.Exists(Util.DataPath + "version.ver");
-		if (CoreConst.DebugMode == true || isExists) {
+        bool isExists = Directory.Exists(FileUtil.DataPath) && Directory.Exists(FileUtil.DataPath + "lua/") && File.Exists(FileUtil.DataPath + CoreConst.VersionFile);
+        if (CoreConst.DebugMode == true || isExists)
+        {
 			StartGame ();
 			return;  //文件已经解压过了，自己可添加检查文件列表逻辑
 		}
@@ -33,15 +34,15 @@ public class Main : MonoBehaviour {
 	}
 
 	IEnumerator OnExtractResource() {
-		string dataPath = Util.DataPath; //数据目录
-		string resPath = Util.AppContentPath (); //游戏包资源目录
+		string dataPath = FileUtil.DataPath; //数据目录
+		string resPath = FileUtil.AppContentPath (); //游戏包资源目录
 
 		if (Directory.Exists (dataPath))
 			Directory.Delete (dataPath, true);
 		Directory.CreateDirectory (dataPath);
 
-		string infile = resPath + "version.ver";
-		string outfile = dataPath + "version.ver";
+        string infile = resPath + CoreConst.VersionFile;
+        string outfile = dataPath + CoreConst.VersionFile;
 		if (File.Exists (outfile))
 			File.Delete (outfile);
 		Debug.Log(infile);
@@ -110,7 +111,7 @@ public class Main : MonoBehaviour {
 		ResourceManager resManager = Util.ResManager();
 		resManager.Initialize();
 
-		if (CoreConst.DebugMode == false)
+		if (CoreConst.UpdateMode == true)
 			luaManager.DoFile("PreMain.lua");
 		else
 			luaManager.DoFile("Main.lua");

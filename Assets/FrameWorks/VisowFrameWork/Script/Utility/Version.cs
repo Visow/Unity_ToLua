@@ -207,7 +207,7 @@ namespace VisowFrameWork {
             {
                 url = "";
             }
-            string newFilePath = outPath + "/" + CoreConst.VersionFile;
+            string newFilePath = outPath + CoreConst.VersionFile;
             if (File.Exists(newFilePath))
                 File.Delete(newFilePath);
             List<string> files = new List<string>();

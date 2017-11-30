@@ -360,7 +360,7 @@ namespace VisowFrameWork {
             byte[] stream = null;
             string uri = string.Empty;
             bundles = new Dictionary<string, AssetBundle>();
-            uri = Util.DataPath + "/Resources/Resources";
+            uri = FileUtil.getFilePath("Resources");
             if (!File.Exists(uri)) return;
             stream = File.ReadAllBytes(uri);
             assetbundle = AssetBundle.LoadFromMemory(stream);
@@ -391,7 +391,7 @@ namespace VisowFrameWork {
 #if UNITY_EDITOR
             if (CoreConst.DebugMode == true)
             {
-                string assetePath = "Assets/Game/Resources/" + assetName;
+                string assetePath = FileUtil.DevResourcesPath.Replace(FileUtil.EditRoot, "Assets") + assetName;
                 Object obj = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(assetePath);
                 return obj as GameObject; 
             }
@@ -421,7 +421,7 @@ namespace VisowFrameWork {
             AssetBundle bundle = null;
             if (!bundles.ContainsKey(abname)) {
                 byte[] stream = null;
-                string uri = Util.DataPath + "Resources/" + abname;
+                string uri = FileUtil.getFilePath(abname);
                 Debug.LogWarning("LoadFile::>> " + uri);
                 LoadDependencies(abname);
 

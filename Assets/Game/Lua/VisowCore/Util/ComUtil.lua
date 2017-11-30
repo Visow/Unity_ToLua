@@ -14,7 +14,7 @@ function ComUtil.GoUI(resPath, parent)
             else
                 goRf:SetParent(UIRootManager.UIRoot:GetComponent(typeof(UnityEngine.RectTransform)), false)
             end
-            
+            return go
         end
     end
 end

@@ -185,58 +185,7 @@ namespace VisowFrameWork {
             if (mgr != null) mgr.LuaGC();
         }
 
-        /// <summary>
-        /// 取得数据存放目录
-        /// </summary>
-        public static string DataPath {
-            get {
-                string game = CoreConst.AppName.ToLower();
-				Debug.Log(Application.dataPath);
-                if (Application.isMobilePlatform) {
-                    return Application.persistentDataPath + "/" + game + "/";
-                }
-                if (CoreConst.DebugMode) {
-                    return Application.dataPath + "/" + CoreConst.AssetDir + "/";
-                }
-				if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor) {
-                    int i = Application.dataPath.LastIndexOf('/');
-                    return Application.dataPath.Substring(0, i + 1) + game + "/";
-                }
-                return Application.dataPath + "/" + CoreConst.AssetDir + "/";
-            }
-        }
-
-		/// <summary>
-		/// 应用程序内容路径
-		/// </summary>
-		public static string AppContentPath() {
-			string path = string.Empty;
-			switch (Application.platform) {
-			case RuntimePlatform.Android:
-				path = "jar:file://" + Application.dataPath + "!/assets/";
-				break;
-			case RuntimePlatform.IPhonePlayer:
-				path = Application.dataPath + "/Raw/";
-				break;
-			default:
-				path = Application.dataPath + "/" + CoreConst.AssetDir + "/";
-				break;
-			}
-			return path;
-		}
-
-		/// <summary>
-		/// 获取相对路径
-		/// </summary>
-		/// <returns>The relative path.</returns>
-        public static string GetRelativePath() {
-            if (Application.isEditor)
-                return "file://" + System.Environment.CurrentDirectory.Replace("\\", "/") + "/Assets/" + CoreConst.AssetDir + "/";
-            else if (Application.isMobilePlatform || Application.isConsolePlatform)
-                return "file:///" + DataPath;
-            else // For standalone player.
-                return "file://" + Application.streamingAssetsPath + "/";
-        }
+        
 
         /// <summary>
         /// 取得行文本
@@ -281,14 +230,15 @@ namespace VisowFrameWork {
         /// <returns></returns>
         public static int CheckRuntimeFile() {
             if (!Application.isEditor) return 0;
-            string streamDir = Application.dataPath + "/StreamingAssets/";
+            string streamDir = FileUtil.AppContentPath() + CoreConst.AssetDir;
             if (!Directory.Exists(streamDir)) {
                 return -1;
             } else {
                 string[] files = Directory.GetFiles(streamDir);
                 if (files.Length == 0) return -1;
 
-                if (!File.Exists(streamDir + "files.txt")) {
+                if (!File.Exists(streamDir + CoreConst.VersionFile))
+                {
                     return -1;
                 }
             }

@@ -47,14 +47,18 @@ namespace VisowFrameWork {
 
         public void StartGetVersionInfo()
         {
-            curVersionInfo = Version.GetInstance().ReadVersionFile(Util.DataPath + "version.ver");
+            if (CoreConst.UpdateMode == false)
+            {
+                OnStartGame();
+            }
+            curVersionInfo = Version.GetInstance().ReadVersionFile(FileUtil.DataPath + CoreConst.VersionFile);
             StartCoroutine("GetVersionInfo");
         }
 
         IEnumerator GetVersionInfo()
         {
-            Debug.Log(curVersionInfo.updateUrl + curVersionInfo.Target + "/" + "version.ver");
-            WWW loadVersion = new WWW(curVersionInfo.updateUrl + curVersionInfo.Target + "/" + "version.ver");
+            Debug.Log(curVersionInfo.updateUrl + curVersionInfo.Target + "/" + CoreConst.VersionFile);
+            WWW loadVersion = new WWW(curVersionInfo.updateUrl + curVersionInfo.Target + "/" + CoreConst.VersionFile);
             yield return loadVersion;
 
             if (!loadVersion.error.Equals(""))
@@ -157,9 +161,9 @@ namespace VisowFrameWork {
                     try
                     {
                         string subPath = loadFile.url.Replace(urlTitle, "");
-                        string fullPath = Util.DataPath + subPath;
+                        string fullPath = FileUtil.DataPath + subPath;
                         string[] dirArr = subPath.Split('/');
-                        string fullDirName = Util.DataPath;
+                        string fullDirName = FileUtil.DataPath;
                         for (int i = 0; i < dirArr.Length - 1; i++)
                         {
                             fullDirName += (dirArr[i] + "/");

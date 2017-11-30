@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace LibServer.Service {
-    abstract class HttpService {
+    public abstract class HttpService {
         protected string host;
         HttpListener listener;
         bool is_active = true;

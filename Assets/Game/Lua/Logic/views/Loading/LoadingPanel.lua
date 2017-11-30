@@ -17,6 +17,7 @@ end
 function LoadingPanel:Awake()
     LoadingManager:LoadSceneByName("Home", handler(self, self.onProcess), handler(self, self.onComplete), function()
         ComUtil.GoUI("prefabs/game/battle/BattlePanel.prefab")
+        ComUtil.GoUI("prefabs/game/HomePanel/HomePanel.prefab")
     end)
 end
 
@@ -43,12 +44,6 @@ end
 
 function LoadingPanel:onComplete(sName)
     self:onProcess(100)
-
-
-end
-
-function LoadingPanel:UpDate()
-
 end
 
 return LoadingPanel
