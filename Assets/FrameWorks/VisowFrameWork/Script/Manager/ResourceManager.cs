@@ -396,29 +396,13 @@ namespace VisowFrameWork {
                 return obj as GameObject; 
             }
 #endif
-
-            string abPath = "";
-            string abName = "";
             string[] assetSplit = assetName.Replace('\\', '/').Split('/');
-            for (int i = 0; i < assetSplit.Length - 1; i++)
-            {
-                if (i == 0)
-                {
-                    abPath += assetSplit[i];
-                    abName += assetSplit[i];
-                }
-                else
-                {
-                    abPath += ("/" + assetSplit[i]);
-                    abName += ("_" + assetSplit[i]);
-                }
-            }
-            string[] subfixSplit = assetName.Split('.');
-            abPath += ("/" + abName + "_" + subfixSplit[subfixSplit.Length - 1]);
             string fileName = assetSplit[assetSplit.Length - 1];
+			string abName = assetName.Replace ('\\', '/').Replace ('/', '_');
+			abName = abName.Remove (abName.Length - assetSplit [assetSplit.Length - 1].Length - 1);
             UnityEngine.Debug.Log("Load Asset abName:" + abName + ", fileName:" + fileName);
             abName = abName.ToLower();
-            GameObject prefab = LoadAsset<UObject>(abPath, fileName) as GameObject;
+			GameObject prefab = LoadAsset<UObject>(abName, fileName) as GameObject;
             if (prefab != null)
                 return prefab;
 

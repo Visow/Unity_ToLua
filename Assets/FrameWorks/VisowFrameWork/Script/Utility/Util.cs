@@ -191,13 +191,14 @@ namespace VisowFrameWork {
         public static string DataPath {
             get {
                 string game = CoreConst.AppName.ToLower();
+				Debug.Log(Application.dataPath);
                 if (Application.isMobilePlatform) {
                     return Application.persistentDataPath + "/" + game + "/";
                 }
                 if (CoreConst.DebugMode) {
                     return Application.dataPath + "/" + CoreConst.AssetDir + "/";
                 }
-                if (Application.platform == RuntimePlatform.OSXEditor) {
+				if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor) {
                     int i = Application.dataPath.LastIndexOf('/');
                     return Application.dataPath.Substring(0, i + 1) + game + "/";
                 }
@@ -205,6 +206,29 @@ namespace VisowFrameWork {
             }
         }
 
+		/// <summary>
+		/// 应用程序内容路径
+		/// </summary>
+		public static string AppContentPath() {
+			string path = string.Empty;
+			switch (Application.platform) {
+			case RuntimePlatform.Android:
+				path = "jar:file://" + Application.dataPath + "!/assets/";
+				break;
+			case RuntimePlatform.IPhonePlayer:
+				path = Application.dataPath + "/Raw/";
+				break;
+			default:
+				path = Application.dataPath + "/" + CoreConst.AssetDir + "/";
+				break;
+			}
+			return path;
+		}
+
+		/// <summary>
+		/// 获取相对路径
+		/// </summary>
+		/// <returns>The relative path.</returns>
         public static string GetRelativePath() {
             if (Application.isEditor)
                 return "file://" + System.Environment.CurrentDirectory.Replace("\\", "/") + "/Assets/" + CoreConst.AssetDir + "/";
@@ -237,25 +261,6 @@ namespace VisowFrameWork {
             get {
                 return Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork;
             }
-        }
-
-        /// <summary>
-        /// 应用程序内容路径
-        /// </summary>
-        public static string AppContentPath() {
-            string path = string.Empty;
-            switch (Application.platform) {
-                case RuntimePlatform.Android:
-                    path = "jar:file://" + Application.dataPath + "!/assets/";
-                break;
-                case RuntimePlatform.IPhonePlayer:
-                    path = Application.dataPath + "/Raw/";
-                break;
-                default:
-                    path = Application.dataPath + "/" + CoreConst.AssetDir + "/";
-                break;
-            }
-            return path;
         }
 
         public static void Log(string str) {

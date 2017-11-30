@@ -12,6 +12,7 @@ namespace VisowFrameWork {
             Windows,
             Android,
             IOS,
+			Mac,
         }
 
         string appVer = "0.0.0";
@@ -27,18 +28,15 @@ namespace VisowFrameWork {
             {
                 VersionInfo curVersionInfo = Version.GetInstance().ReadVersionFile(filePath);
                 target = curVersionInfo.Target;
-                if (target.Equals("Windows"))
-                {
-                    buildTarget = ResBuildTarget.Windows;
-                }
-                else if (target.Equals("Android"))
-                {
-                    buildTarget = ResBuildTarget.Android;
-                }
-                else if (target.Equals("IOS"))
-                {
-                    buildTarget = ResBuildTarget.IOS;
-                }
+				if (target.Equals ("Windows")) {
+					buildTarget = ResBuildTarget.Windows;
+				} else if (target.Equals ("Android")) {
+					buildTarget = ResBuildTarget.Android;
+				} else if (target.Equals ("IOS")) {
+					buildTarget = ResBuildTarget.IOS;
+				} else if (target.Equals ("Mac")) {
+					buildTarget = ResBuildTarget.Mac;
+				}
                 appVer = curVersionInfo.AppVersion;
                 resVer = curVersionInfo.ResVersion;
                 url = curVersionInfo.updateUrl;
@@ -68,6 +66,11 @@ namespace VisowFrameWork {
 #endif
                         break;                 
                     }
+				case ResBuildTarget.Mac:
+					{
+						curTarget = BuildTarget.StandaloneOSXUniversal;
+						break;
+					}
 
                 default:
                     break;

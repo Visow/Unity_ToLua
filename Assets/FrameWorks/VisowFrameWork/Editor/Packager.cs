@@ -76,33 +76,22 @@ namespace VisowFrameWork {
         {
             string[] files = Directory.GetFiles(path, pattern);
             if (files.Length == 0) return;
-
+			List<string> abFileList = new List<string> ();
             for (int i = 0; i < files.Length; i++)
             {
-                files[i] = files[i].Replace('\\', '/');
+				if(files[i].EndsWith(".meta"))
+					continue;
+				abFileList.Add(files[i].Replace('\\', '/'));
             }
+			if (abFileList.Count == 0)
+				return;
             AssetBundleBuild build = new AssetBundleBuild();
             string[] split = bundleName.Split('/');
             string fileName = "";
             string writeBundleName = "";
-            for (int i = 0; i < split.Length; i++)
-            {
-                if (i > 0)
-                {
-                    fileName += ('_' + split[i]);
-                    if (i < split.Length - 1)
-                    {
-                        writeBundleName += ('/' + split[i]);
-                    }
-                }
-                else
-                {
-                    fileName += split[i];
-                    writeBundleName += split[i];
-                }
-            }
+			bundleName = bundleName.Replace ('/', '_');
 
-            build.assetBundleName = writeBundleName + "/" + fileName;
+			build.assetBundleName = bundleName;
             build.assetNames = files;
             maps.Add(build);
         }
@@ -212,11 +201,10 @@ namespace VisowFrameWork {
             {
                 string name = dir.Replace(workResPath + "/", "");
                 string[] curFiles = Directory.GetFiles(dir);
+				string subFilePath = "Assets/" + dir.Substring (AppDataPath.Length + 1);
                 if (curFiles.Length > 0)
                 {
-                    AddBuildMap(name + "/png" + CoreConst.ExtName, "*.png", "Assets/" + dir.Substring(AppDataPath.Length + 1));
-                    AddBuildMap(name + "/prefab" + CoreConst.ExtName, "*.prefab", "Assets/" + dir.Substring(AppDataPath.Length + 1));
-                    AddBuildMap(name + "/anim" + CoreConst.ExtName, "*.anim", "Assets/" + dir.Substring(AppDataPath.Length + 1));
+					AddBuildMap (name + CoreConst.ExtName, "*.*", subFilePath);
                 }
             }
         }
