@@ -106,7 +106,12 @@ namespace VisowFrameWork {
                 // 编译之前,保存旧的文件
                 //Packager.SaveOldVersionInfo(curTarget);
                 // 编译资源
-                string outDir = curOutPath + System.Enum.GetName(typeof(ResBuildTarget), buildTarget) + "/";
+                string outDir = curOutPath;
+                if ((ResOutPath)resOutPath == ResOutPath.UpdateServer)
+                {
+                    outDir += System.Enum.GetName(typeof(ResBuildTarget), buildTarget) + "/";
+                }
+                
                 Packager.BuildAssetResource(curTarget, outDir);
                 Packager.BuildFileIndex(System.Enum.GetName(typeof(ResBuildTarget), buildTarget), appVer, resVer, url, outDir);
             }
