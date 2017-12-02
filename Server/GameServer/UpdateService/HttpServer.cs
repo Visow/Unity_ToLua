@@ -11,7 +11,7 @@ class HttpServer : HttpService {
     Thread thread;
 
     public HttpServer(int port) {
-        host = "http://localhost:" + port + "/";
+        host = "http://*:" + port + "/";
     }
 
     public void Start() {
