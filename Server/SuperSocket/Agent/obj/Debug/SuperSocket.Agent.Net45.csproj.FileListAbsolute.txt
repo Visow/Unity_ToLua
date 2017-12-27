@@ -1,5 +1,0 @@
-F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Agent.exe
-F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Agent.pdb
-F:\Unity\Project_1\Server\SuperSocket\Agent\obj\Debug\SuperSocket.Agent.Net45.csprojResolveAssemblyReference.cache
-F:\Unity\Project_1\Server\SuperSocket\Agent\obj\Debug\SuperSocket.Agent.exe
-F:\Unity\Project_1\Server\SuperSocket\Agent\obj\Debug\SuperSocket.Agent.pdb

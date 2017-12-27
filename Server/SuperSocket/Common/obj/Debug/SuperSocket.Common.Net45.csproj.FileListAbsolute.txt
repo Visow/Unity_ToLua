@@ -1,6 +1,0 @@
-F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Common.XML
-F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Common.dll
-F:\Unity\Project_1\Server\bin\Debug\SuperSocket.Common.pdb
-F:\Unity\Project_1\Server\SuperSocket\Common\obj\Debug\SuperSocket.Common.Net45.csprojResolveAssemblyReference.cache
-F:\Unity\Project_1\Server\SuperSocket\Common\obj\Debug\SuperSocket.Common.dll
-F:\Unity\Project_1\Server\SuperSocket\Common\obj\Debug\SuperSocket.Common.pdb
