@@ -141,7 +141,7 @@ namespace LuaInterface
             for (int i = 0; i < searchPaths.Count; i++)
             {
                 fullPath = searchPaths[i].Replace("?", fileName);
-
+				Debug.LogWarning("====>>" + fullPath);
                 if (File.Exists(fullPath))
                 {
                     return fullPath;
@@ -159,7 +159,7 @@ namespace LuaInterface
             if (!string.IsNullOrEmpty(path) && File.Exists(path))
             {
 #if !UNITY_WEBPLAYER
-                str = File.ReadAllBytes(path);
+				str=  System.Text.Encoding.UTF8.GetBytes(File.ReadAllText(path, Encoding.UTF8)) ;
 #else
                 throw new LuaException("can't run in web platform, please switch to other platform");
 #endif
