@@ -275,10 +275,9 @@ namespace VisowFrameWork {
         /// <summary>
         /// 发送连接请求
         /// </summary>
-        public void SendConnect()
+        public void SendConnect(string host, int port)
         {
-            //ConnectServer(AppConst.SocketAddress, AppConst.SocketPort);
-            ConnectServer("13.229.130.220", 8885);
+            ConnectServer(host, port);
         }
 
         /// <summary>

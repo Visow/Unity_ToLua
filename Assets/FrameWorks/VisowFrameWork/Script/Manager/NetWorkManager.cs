@@ -68,9 +68,9 @@ namespace VisowFrameWork
         /// <summary>
         /// 发送链接请求
         /// </summary>
-        public void SendConnect()
+        public void SendConnect(string host, int prot)
         {
-            SocketClient.SendConnect();
+            SocketClient.SendConnect(host, prot);
         }
 
         /// <summary>

@@ -116,6 +116,8 @@ namespace LuaInterface
             OpenBaseLibs();
             LuaSetTop(0);
             InitLuaPath();
+
+            LuaDLL.tolua_setflag(ToLuaFlags.INDEX_ERROR, false);
             Debugger.Log("Init lua state cost: {0}", Time.realtimeSinceStartup - time);
         }        
 

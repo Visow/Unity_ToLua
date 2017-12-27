@@ -55,7 +55,7 @@ function UpdatePanel:OnUpdateManagerCallBack(eventID, opt1, opt2, opt3, opt4)
 end
 
 function UpdatePanel:SetMsg(str)
-    local textTf = FindChildTfByList( "text", self.gameObject.transform)
+    local textTf = ComUtil.FindChildTfByList( "text", self.gameObject.transform)
     if textTf then
         local textCt = textTf:GetComponent(typeof(UnityEngine.UI.Text))
         if textCt then
@@ -66,7 +66,7 @@ end
 
 function UpdatePanel:SetCheckProcess(total, idx)
     self:SetMsg("资源比对中:"..idx.."/"..total)
-    local processTf = FindChildTfByList("progressBar", self.gameObject.transform)
+    local processTf = ComUtil.FindChildTfByList("progressBar", self.gameObject.transform)
     if processTf then
         local processCt = processTf:GetComponent(typeof(cs.UIProgressBar))
         if processCt then
@@ -81,7 +81,7 @@ end
 
 function UpdatePanel:SetDownLoadProcess(total, idx)
     self:SetMsg("资源下载中:"..idx.."/"..total)
-    local processTf = FindChildTfByList("progressBar", self.gameObject.transform)
+    local processTf = ComUtil.FindChildTfByList("progressBar", self.gameObject.transform)
     if processTf then
         local processCt = processTf:GetComponent(typeof(cs.UIProgressBar))
         if processCt then

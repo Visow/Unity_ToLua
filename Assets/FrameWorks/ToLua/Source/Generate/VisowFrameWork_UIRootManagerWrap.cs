@@ -10,6 +10,7 @@ public class VisowFrameWork_UIRootManagerWrap
 		L.RegFunction("Close", Close);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
+		L.RegVar("ScreenSize", get_ScreenSize, null);
 		L.RegVar("UIRoot", get_UIRoot, null);
 		L.EndClass();
 	}
@@ -45,6 +46,25 @@ public class VisowFrameWork_UIRootManagerWrap
 		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_ScreenSize(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			VisowFrameWork.UIRootManager obj = (VisowFrameWork.UIRootManager)o;
+			UnityEngine.Vector2 ret = obj.ScreenSize;
+			ToLua.Push(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index ScreenSize on a nil value");
 		}
 	}
 

@@ -12,8 +12,6 @@ namespace LibServer.Timer
         System.Timers.Timer timer = null;
 
         public ConfigTimer() {
-            ConfigUtil.LoadConfig();    //上来读取一次
-
             timer = new System.Timers.Timer(time * 60 * 1000);
             timer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimeUpdate);
             timer.AutoReset = true;
@@ -38,7 +36,6 @@ namespace LibServer.Timer
         /// 计时器更新
         /// </summary>
         private void OnTimeUpdate(object sender, System.Timers.ElapsedEventArgs e) {
-            ConfigUtil.LoadConfig();
             Console.WriteLine("OnConfigNow--->>>" + time);
         }
     }

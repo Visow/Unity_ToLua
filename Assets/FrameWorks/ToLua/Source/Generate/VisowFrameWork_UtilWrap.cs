@@ -19,9 +19,7 @@ public class VisowFrameWork_UtilWrap
 		L.RegFunction("md5file", md5file);
 		L.RegFunction("ClearChild", ClearChild);
 		L.RegFunction("ClearMemory", ClearMemory);
-		L.RegFunction("GetRelativePath", GetRelativePath);
 		L.RegFunction("GetFileText", GetFileText);
-		L.RegFunction("AppContentPath", AppContentPath);
 		L.RegFunction("Log", Log);
 		L.RegFunction("LogWarning", LogWarning);
 		L.RegFunction("LogError", LogError);
@@ -36,7 +34,6 @@ public class VisowFrameWork_UtilWrap
 		L.RegFunction("LoadingManager", LoadingManager);
 		L.RegFunction("New", _CreateVisowFrameWork_Util);
 		L.RegFunction("__tostring", ToLua.op_ToString);
-		L.RegVar("DataPath", get_DataPath, null);
 		L.RegVar("NetAvailable", get_NetAvailable, null);
 		L.RegVar("IsWifi", get_IsWifi, null);
 		L.EndClass();
@@ -302,22 +299,6 @@ public class VisowFrameWork_UtilWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetRelativePath(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 0);
-			string o = VisowFrameWork.Util.GetRelativePath();
-			LuaDLL.lua_pushstring(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetFileText(IntPtr L)
 	{
 		try
@@ -325,22 +306,6 @@ public class VisowFrameWork_UtilWrap
 			ToLua.CheckArgsCount(L, 1);
 			string arg0 = ToLua.CheckString(L, 1);
 			string o = VisowFrameWork.Util.GetFileText(arg0);
-			LuaDLL.lua_pushstring(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int AppContentPath(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 0);
-			string o = VisowFrameWork.Util.AppContentPath();
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
@@ -537,20 +502,6 @@ public class VisowFrameWork_UtilWrap
 			ToLua.CheckArgsCount(L, 0);
 			VisowFrameWork.LoadingManager o = VisowFrameWork.Util.LoadingManager();
 			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_DataPath(IntPtr L)
-	{
-		try
-		{
-			LuaDLL.lua_pushstring(L, VisowFrameWork.Util.DataPath);
 			return 1;
 		}
 		catch (Exception e)

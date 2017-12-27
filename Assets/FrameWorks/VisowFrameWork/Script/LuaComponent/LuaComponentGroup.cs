@@ -10,6 +10,17 @@ namespace VisowFrameWork {
         [SerializeField]
         public List<LuaComponent> luaComponenetList = new List<LuaComponent>();
 
+        public LuaComponent GetLuaComponent(string modelName) {
+            foreach (var item in luaComponenetList)
+            {
+                if (item.modelName == modelName)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
         public static LuaComponent CreateLuaComponent(string modelName)
         {
             object[] objectArr = Util.LuaManager().CallFunction("CreateLuaComponent", modelName);

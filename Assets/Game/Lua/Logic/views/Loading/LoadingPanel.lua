@@ -26,14 +26,14 @@ function LoadingPanel:Start()
 end
 
 function LoadingPanel:onProcess(nVar)
-    local textTf = FindChildTfByList( "text", self.gameObject.transform)
+    local textTf = ComUtil.FindChildTfByList( "text", self.gameObject.transform)
     if textTf then
         local textCt = textTf:GetComponent(typeof(UnityEngine.UI.Text))
         if textCt then
             textCt.text = "加载场景中 >>"..nVar.."%"
         end
     end
-    local processTf = FindChildTfByList("processBar", self.gameObject.transform)
+    local processTf = ComUtil.FindChildTfByList("processBar", self.gameObject.transform)
     if processTf then
         local processCt = processTf:GetComponent(typeof(cs.UIProgressBar))
         if processCt then

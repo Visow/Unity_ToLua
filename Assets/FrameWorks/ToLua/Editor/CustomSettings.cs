@@ -66,6 +66,8 @@ public static class CustomSettings
         _GT(typeof(VisowFrameWork.ResourceManager)).SetNameSpace("cs"),
         _GT(typeof(VisowFrameWork.Util)).SetNameSpace("cs"),
         _GT(typeof(VisowFrameWork.LuaComponent)).SetNameSpace("cs"),
+        _GT(typeof(VisowFrameWork.LuaComponentGroup)).SetNameSpace("cs"),
+        _GT(typeof(List<VisowFrameWork.LuaComponent>)).SetNameSpace("cs"),
         _GT(typeof(VisowFrameWork.UIRootManager)).SetNameSpace("cs"),
         _GT(typeof(VisowFrameWork.UpdateManager)).SetNameSpace("cs"),
         _GT(typeof(VisowFrameWork.UIProgressBar)).SetNameSpace("cs"),
@@ -93,7 +95,10 @@ public static class CustomSettings
         _GT(typeof(Camera)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         _GT(typeof(AudioSource)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         //_GT(typeof(LineRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
-        //_GT(typeof(TrailRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),    
+        //_GT(typeof(TrailRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),  
+  
+       _GT(typeof(DG.Tweening.Ease)),
+
 #else
                                          
         _GT(typeof(Component)),
@@ -184,6 +189,8 @@ public static class CustomSettings
         _GT(typeof(UnityEngine.VerticalWrapMode)),
 
         _GT(typeof(UnityEngine.EventSystems.PointerEventData)),
+
+        _GT(typeof(UnityEngine.PlayerPrefs)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

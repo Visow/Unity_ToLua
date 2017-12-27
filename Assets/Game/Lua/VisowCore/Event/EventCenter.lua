@@ -168,7 +168,7 @@ function EventCenter.addClient(msgId, object, callBack, priority)
     EventCenter.getInstance():registerClient(msgId, object, callBack, priority)
 end
 
-function EventCenter.Destory(object)
+function EventCenter.Destroy(object)
     EventCenter.getInstance():removeObject(object)
 end
 

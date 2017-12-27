@@ -38,9 +38,11 @@ public class VisowFrameWork_NetWorkManagerWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 1);
+			ToLua.CheckArgsCount(L, 3);
 			VisowFrameWork.NetWorkManager obj = (VisowFrameWork.NetWorkManager)ToLua.CheckObject<VisowFrameWork.NetWorkManager>(L, 1);
-			obj.SendConnect();
+			string arg0 = ToLua.CheckString(L, 2);
+			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+			obj.SendConnect(arg0, arg1);
 			return 0;
 		}
 		catch (Exception e)

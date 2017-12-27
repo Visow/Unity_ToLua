@@ -11,3 +11,5 @@ App = {}
 App.Config = {
     CC_DISABLE_GLOBAL = true
 }
+
+App.Json = require "cjson"

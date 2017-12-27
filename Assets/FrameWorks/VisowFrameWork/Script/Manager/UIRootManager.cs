@@ -7,7 +7,11 @@ using UnityEngine.UI;
 namespace VisowFrameWork {
     public class UIRootManager : ManagerBase
     {
-
+        public Vector2 ScreenSize {
+            get {
+                return uiRoot.GetComponent<RectTransform>().sizeDelta;
+            }
+        }
         GameObject uiRoot;
         public GameObject UIRoot {
             get {

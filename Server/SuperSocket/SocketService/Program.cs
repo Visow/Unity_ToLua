@@ -229,6 +229,11 @@ namespace SuperSocket.SocketService
             AddCommand("List", "List all server instances", ListCommand);
             AddCommand("Start", "Start a server instance: Start {ServerName}", StartCommand);
             AddCommand("Stop", "Stop a server instance: Stop {ServerName}", StopCommand);
+            Console.WriteLine("-------------------------------------------------------");
+            Console.WriteLine("[List]  : List all server instances");
+            Console.WriteLine("[Start] : Start a server instance: Start {ServerName}");
+            Console.WriteLine("[Stop]  : Stop a server instance: Stop {ServerName}");
+            Console.WriteLine("-------------------------------------------------------");
         }
 
         private static void RunAsController(string[] arguments)

@@ -639,23 +639,3 @@ function string.formatnumberthousands(num)
     end
     return formatted
 end
-
-
------------------------expand visow framework for lua------------------------------------
-
-function FindChildTfByList(str, parentTf)
-    local nameList = string.split(str, ":")
-    if parentTf then
-        local objtf = parentTf
-        for i = 1, #nameList do
-            objtf = objtf:Find(nameList[i])
-            if objtf == nil then
-                return nil
-            end
-        end
-        return objtf
-    else
-        str = string.gsub(str, ":", "/")
-        return child(str)
-    end
-end

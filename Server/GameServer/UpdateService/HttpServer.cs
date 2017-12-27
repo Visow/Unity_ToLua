@@ -45,7 +45,7 @@ class HttpServer : HttpService {
 
     public override void OnGetRequest(HttpListenerRequest request, HttpListenerResponse response)
 	{
-        string url = request.Url.ToString().Remove(0, host.Length - 1);
+        string url = request.Url.ToString().Remove(0, ("http://" + request.UserHostName).Length);
         if (url.Contains("?v")) {
             url = url.Substring(0, url.IndexOf("?v"));
         }

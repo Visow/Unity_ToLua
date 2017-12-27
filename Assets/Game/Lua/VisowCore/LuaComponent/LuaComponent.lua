@@ -115,6 +115,20 @@ function LuaComponent:Awake(opt)
 
 end
 
+--==============================--
+--desc: 作为启动参数接口
+--time:2017-12-14 05:18:18
+--@args:
+--@return 
+--==============================--
+function LuaComponent:StartByArgs(...)
+    self.startArgs = {...}
+end
+
+function LuaComponent:GetStartArg(index)
+    return self.startArgs[index]
+end
+
 function LuaComponent:Start(opt)
 
 end
@@ -125,9 +139,14 @@ end
 
 function LuaComponent:OnDestroy(opt)
     log(self.__cname.."============>OnDestroy")
-    EventCenter.Destory(self)
+    EventCenter.Destroy(self)
     self:OnExit()
 end
+
+function LuaComponent:GetComponent(type)
+    return self.gameObject:GetComponent(typeof(type))
+end
+
 
 function LuaComponent:Focus(opt)
 
@@ -135,8 +154,4 @@ end
 
 function LuaComponent:Enable(opt)
 
-end
-
-function LuaComponent:TestClass()
-    log(self.__cname .. "=======>TestClass")
 end

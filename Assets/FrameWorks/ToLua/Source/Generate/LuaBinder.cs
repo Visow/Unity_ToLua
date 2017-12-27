@@ -18,6 +18,8 @@ public static class LuaBinder
 		VisowFrameWork_ResourceManagerWrap.Register(L);
 		VisowFrameWork_UtilWrap.Register(L);
 		VisowFrameWork_LuaComponentWrap.Register(L);
+		VisowFrameWork_LuaComponentGroupWrap.Register(L);
+		System_Collections_Generic_List_VisowFrameWork_LuaComponentWrap.Register(L);
 		VisowFrameWork_UIRootManagerWrap.Register(L);
 		VisowFrameWork_UpdateManagerWrap.Register(L);
 		VisowFrameWork_UIProgressBarWrap.Register(L);
@@ -29,11 +31,58 @@ public static class LuaBinder
 		L.BeginModule("ga");
 		FootManWrap.Register(L);
 		L.EndModule();
+		L.BeginModule("DG");
+		L.BeginModule("Tweening");
+		DG_Tweening_DOTweenWrap.Register(L);
+		DG_Tweening_TweenWrap.Register(L);
+		DG_Tweening_SequenceWrap.Register(L);
+		DG_Tweening_TweenerWrap.Register(L);
+		DG_Tweening_LoopTypeWrap.Register(L);
+		DG_Tweening_PathModeWrap.Register(L);
+		DG_Tweening_PathTypeWrap.Register(L);
+		DG_Tweening_RotateModeWrap.Register(L);
+		DG_Tweening_EaseWrap.Register(L);
+		L.RegFunction("TweenCallback", DG_Tweening_TweenCallback);
+		L.RegFunction("TweenCallback_int", DG_Tweening_TweenCallback_int);
+		L.BeginModule("Core");
+		L.RegFunction("DOGetter_float", DG_Tweening_Core_DOGetter_float);
+		L.RegFunction("DOSetter_float", DG_Tweening_Core_DOSetter_float);
+		L.RegFunction("DOGetter_double", DG_Tweening_Core_DOGetter_double);
+		L.RegFunction("DOSetter_double", DG_Tweening_Core_DOSetter_double);
+		L.RegFunction("DOGetter_int", DG_Tweening_Core_DOGetter_int);
+		L.RegFunction("DOSetter_int", DG_Tweening_Core_DOSetter_int);
+		L.RegFunction("DOGetter_uint", DG_Tweening_Core_DOGetter_uint);
+		L.RegFunction("DOSetter_uint", DG_Tweening_Core_DOSetter_uint);
+		L.RegFunction("DOGetter_long", DG_Tweening_Core_DOGetter_long);
+		L.RegFunction("DOSetter_long", DG_Tweening_Core_DOSetter_long);
+		L.RegFunction("DOGetter_ulong", DG_Tweening_Core_DOGetter_ulong);
+		L.RegFunction("DOSetter_ulong", DG_Tweening_Core_DOSetter_ulong);
+		L.RegFunction("DOGetter_string", DG_Tweening_Core_DOGetter_string);
+		L.RegFunction("DOSetter_string", DG_Tweening_Core_DOSetter_string);
+		L.RegFunction("DOGetter_DG_Tweening_Core_Surrogates_Vector2Wrapper", DG_Tweening_Core_DOGetter_DG_Tweening_Core_Surrogates_Vector2Wrapper);
+		L.RegFunction("DOSetter_DG_Tweening_Core_Surrogates_Vector2Wrapper", DG_Tweening_Core_DOSetter_DG_Tweening_Core_Surrogates_Vector2Wrapper);
+		L.RegFunction("DOGetter_DG_Tweening_Core_Surrogates_Vector3Wrapper", DG_Tweening_Core_DOGetter_DG_Tweening_Core_Surrogates_Vector3Wrapper);
+		L.RegFunction("DOSetter_DG_Tweening_Core_Surrogates_Vector3Wrapper", DG_Tweening_Core_DOSetter_DG_Tweening_Core_Surrogates_Vector3Wrapper);
+		L.RegFunction("DOGetter_DG_Tweening_Core_Surrogates_Vector4Wrapper", DG_Tweening_Core_DOGetter_DG_Tweening_Core_Surrogates_Vector4Wrapper);
+		L.RegFunction("DOSetter_DG_Tweening_Core_Surrogates_Vector4Wrapper", DG_Tweening_Core_DOSetter_DG_Tweening_Core_Surrogates_Vector4Wrapper);
+		L.RegFunction("DOGetter_DG_Tweening_Core_Surrogates_QuaternionWrapper", DG_Tweening_Core_DOGetter_DG_Tweening_Core_Surrogates_QuaternionWrapper);
+		L.RegFunction("DOSetter_DG_Tweening_Core_Surrogates_QuaternionWrapper", DG_Tweening_Core_DOSetter_DG_Tweening_Core_Surrogates_QuaternionWrapper);
+		L.RegFunction("DOGetter_DG_Tweening_Core_Surrogates_ColorWrapper", DG_Tweening_Core_DOGetter_DG_Tweening_Core_Surrogates_ColorWrapper);
+		L.RegFunction("DOSetter_DG_Tweening_Core_Surrogates_ColorWrapper", DG_Tweening_Core_DOSetter_DG_Tweening_Core_Surrogates_ColorWrapper);
+		L.RegFunction("DOGetter_UnityEngine_Rect", DG_Tweening_Core_DOGetter_UnityEngine_Rect);
+		L.RegFunction("DOSetter_UnityEngine_Rect", DG_Tweening_Core_DOSetter_UnityEngine_Rect);
+		L.RegFunction("DOGetter_UnityEngine_RectOffset", DG_Tweening_Core_DOGetter_UnityEngine_RectOffset);
+		L.RegFunction("DOSetter_UnityEngine_RectOffset", DG_Tweening_Core_DOSetter_UnityEngine_RectOffset);
+		L.RegFunction("DOGetter_UnityEngine_Vector3", DG_Tweening_Core_DOGetter_UnityEngine_Vector3);
+		L.RegFunction("DOSetter_UnityEngine_Vector3", DG_Tweening_Core_DOSetter_UnityEngine_Vector3);
+		L.EndModule();
+		L.EndModule();
+		L.EndModule();
 		L.BeginModule("UnityEngine");
 		UnityEngine_ComponentWrap.Register(L);
 		UnityEngine_TransformWrap.Register(L);
-		UnityEngine_MaterialWrap.Register(L);
 		UnityEngine_LightWrap.Register(L);
+		UnityEngine_MaterialWrap.Register(L);
 		UnityEngine_CameraWrap.Register(L);
 		UnityEngine_AudioSourceWrap.Register(L);
 		UnityEngine_BehaviourWrap.Register(L);
@@ -73,6 +122,7 @@ public static class LuaBinder
 		UnityEngine_SpriteWrap.Register(L);
 		UnityEngine_HorizontalWrapModeWrap.Register(L);
 		UnityEngine_VerticalWrapModeWrap.Register(L);
+		UnityEngine_PlayerPrefsWrap.Register(L);
 		L.BeginModule("UI");
 		UnityEngine_UI_TextWrap.Register(L);
 		UnityEngine_UI_ButtonWrap.Register(L);
@@ -138,6 +188,9 @@ public static class LuaBinder
 		L.RegFunction("Action_int", System_Action_int);
 		L.RegFunction("Comparison_int", System_Comparison_int);
 		L.RegFunction("Func_int_int", System_Func_int_int);
+		L.RegFunction("Predicate_VisowFrameWork_LuaComponent", System_Predicate_VisowFrameWork_LuaComponent);
+		L.RegFunction("Action_VisowFrameWork_LuaComponent", System_Action_VisowFrameWork_LuaComponent);
+		L.RegFunction("Comparison_VisowFrameWork_LuaComponent", System_Comparison_VisowFrameWork_LuaComponent);
 		L.EndModule();
 		L.EndModule();
 		L.BeginPreLoad();
@@ -155,6 +208,870 @@ public static class LuaBinder
 		L.AddPreLoad("UnityEngine.Rigidbody", LuaOpen_UnityEngine_Rigidbody, typeof(UnityEngine.Rigidbody));
 		L.EndPreLoad();
 		Debugger.Log("Register lua type cost time: {0}", Time.realtimeSinceStartup - t);
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_TweenCallback(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.TweenCallback>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.TweenCallback>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_TweenCallback_int(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.TweenCallback<int>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.TweenCallback<int>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_float(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<float>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<float>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_float(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<float>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<float>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_double(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<double>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<double>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_double(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<double>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<double>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_int(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<int>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<int>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_int(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<int>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<int>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_uint(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<uint>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<uint>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_uint(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<uint>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<uint>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_long(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<long>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<long>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_long(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<long>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<long>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_ulong(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<ulong>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<ulong>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_ulong(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<ulong>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<ulong>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_string(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<string>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<string>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_string(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<string>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<string>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_DG_Tweening_Core_Surrogates_Vector2Wrapper(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<DG.Tweening.Core.Surrogates.Vector2Wrapper>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<DG.Tweening.Core.Surrogates.Vector2Wrapper>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_DG_Tweening_Core_Surrogates_Vector2Wrapper(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<DG.Tweening.Core.Surrogates.Vector2Wrapper>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<DG.Tweening.Core.Surrogates.Vector2Wrapper>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_DG_Tweening_Core_Surrogates_Vector3Wrapper(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<DG.Tweening.Core.Surrogates.Vector3Wrapper>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<DG.Tweening.Core.Surrogates.Vector3Wrapper>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_DG_Tweening_Core_Surrogates_Vector3Wrapper(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<DG.Tweening.Core.Surrogates.Vector3Wrapper>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<DG.Tweening.Core.Surrogates.Vector3Wrapper>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_DG_Tweening_Core_Surrogates_Vector4Wrapper(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<DG.Tweening.Core.Surrogates.Vector4Wrapper>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<DG.Tweening.Core.Surrogates.Vector4Wrapper>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_DG_Tweening_Core_Surrogates_Vector4Wrapper(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<DG.Tweening.Core.Surrogates.Vector4Wrapper>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<DG.Tweening.Core.Surrogates.Vector4Wrapper>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_DG_Tweening_Core_Surrogates_QuaternionWrapper(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<DG.Tweening.Core.Surrogates.QuaternionWrapper>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<DG.Tweening.Core.Surrogates.QuaternionWrapper>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_DG_Tweening_Core_Surrogates_QuaternionWrapper(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<DG.Tweening.Core.Surrogates.QuaternionWrapper>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<DG.Tweening.Core.Surrogates.QuaternionWrapper>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_DG_Tweening_Core_Surrogates_ColorWrapper(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<DG.Tweening.Core.Surrogates.ColorWrapper>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<DG.Tweening.Core.Surrogates.ColorWrapper>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_DG_Tweening_Core_Surrogates_ColorWrapper(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<DG.Tweening.Core.Surrogates.ColorWrapper>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<DG.Tweening.Core.Surrogates.ColorWrapper>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_UnityEngine_Rect(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.Rect>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.Rect>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_UnityEngine_Rect(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.Rect>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.Rect>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_UnityEngine_RectOffset(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.RectOffset>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.RectOffset>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_UnityEngine_RectOffset(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.RectOffset>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.RectOffset>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOGetter_UnityEngine_Vector3(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector3>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector3>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DG_Tweening_Core_DOSetter_UnityEngine_Vector3(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector3>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector3>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -579,6 +1496,87 @@ public static class LuaBinder
 			{
 				LuaTable self = ToLua.CheckLuaTable(L, 2);
 				Delegate arg1 = DelegateTraits<System.Func<int,int>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int System_Predicate_VisowFrameWork_LuaComponent(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<System.Predicate<VisowFrameWork.LuaComponent>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<System.Predicate<VisowFrameWork.LuaComponent>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int System_Action_VisowFrameWork_LuaComponent(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<System.Action<VisowFrameWork.LuaComponent>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<System.Action<VisowFrameWork.LuaComponent>>.Create(func, self);
+				ToLua.Push(L, arg1);
+			}
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int System_Comparison_VisowFrameWork_LuaComponent(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+
+			if (count == 1)
+			{
+				Delegate arg1 = DelegateTraits<System.Comparison<VisowFrameWork.LuaComponent>>.Create(func);
+				ToLua.Push(L, arg1);
+			}
+			else
+			{
+				LuaTable self = ToLua.CheckLuaTable(L, 2);
+				Delegate arg1 = DelegateTraits<System.Comparison<VisowFrameWork.LuaComponent>>.Create(func, self);
 				ToLua.Push(L, arg1);
 			}
 			return 1;

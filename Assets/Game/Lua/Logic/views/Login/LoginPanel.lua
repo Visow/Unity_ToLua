@@ -14,18 +14,22 @@ local LoginPanel = class("LoginPanel", LuaComponent)
 function LoginPanel:Ctor(...)
     LuaComponent.Ctor(self, ...)
     log("LoginPanel: Ctor")
-    EventCenter.addTCP(Protocal.Connect, self, self.OnConnect)
-    EventCenter.addTCP(Protocal.Login, self, self.OnLogin)
-    NetModel.Connect()
+    -- EventCenter.addTCP(Protocal.Connect, self, self.OnConnect)
+    -- EventCenter.addTCP(Protocal.Login, self, self.OnLogin)
+    -- NetModel.Connect()
 end
 
 function LoginPanel:Awake()
-    local pBtnTf = FindChildTfByList("bgImg:loginBtn", self.gameObject.transform)
+    local pBtnTf = ComUtil.FindChildTfByList("bgImg:loginBtn", self.gameObject.transform)
     if pBtnTf then
         local pBtnCom = pBtnTf:GetComponent(typeof(UnityEngine.UI.Button))
         if pBtnCom then
             pBtnCom.onClick:AddListener(handler(self, self.onLoginClick))
         end
+    end
+    local registerBtnCom = ComUtil.FindChildComByList(UnityEngine.UI.Button, "bgImg:rejisterBtn", self.gameObject.transform)
+    if registerBtnCom then
+        registerBtnCom.onClick:AddListener(handler(self, self.onRegisterEvent))
     end
 end
 
@@ -44,15 +48,10 @@ end
 
 function LoginPanel:onLoginClick()
     log("LoginPanel:onLoginClick")
+end
 
-    local loadPrefab = ResManager:GetPrefab("prefabs/game/loadingpanel/LoadingPanel.prefab")
-    if loadPrefab then
-        local loadPanel = UnityEngine.GameObject.Instantiate(loadPrefab)
-        if loadPanel then
-            local loadRf = loadPanel:GetComponent(typeof(UnityEngine.RectTransform))
-            loadRf:SetParent(UIRootManager.UIRoot:GetComponent(typeof(UnityEngine.RectTransform)), false)
-        end
-    end
+function LoginPanel:onRegisterEvent()
+    ComUtil.GoUI("prefabs/game/LoginPanel/RegisterPanel.prefab")
 end
 
 function LoginPanel:OnConnect(event, msgId, byteBuff)

@@ -15,7 +15,7 @@ function BattlePanel:Ctor(...)
 end
 
 function BattlePanel:Awake()
-    self.yaoGanTf = FindChildTfByList("yaoGan", self.gameObject.transform)
+    self.yaoGanTf = ComUtil.FindChildTfByList("yaoGan", self.gameObject.transform)
     cs.EventListener.Get(self.yaoGanTf.gameObject).onDragBegin = handler(self, self.onDragBegin)
     cs.EventListener.Get(self.yaoGanTf.gameObject).onDrag = handler(self, self.onDrag)
     cs.EventListener.Get(self.yaoGanTf.gameObject).onDragEnd = handler(self, self.onDragEnd)
